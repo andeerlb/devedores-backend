@@ -1,0 +1,28 @@
+CREATE TABLE IF NOT EXISTS `user` (
+  id INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  username VARCHAR(255) NOT NULL UNIQUE,
+  email VARCHAR(255) NULL,
+  website VARCHAR(255) NULL,
+  phone VARCHAR(255) NULL,
+  zip_code VARCHAR(255) NULL,
+  city VARCHAR(255) NULL,
+  suite VARCHAR(255) NULL,
+  street VARCHAR(255) NULL,
+  company_name VARCHAR(255) NULL,
+  catch_phrase VARCHAR(255) NULL,
+  bs VARCHAR(255) NULL,
+  latitude NUMERIC(10,6) NULL,
+  longitude NUMERIC(10,6) NULL,
+  PRIMARY KEY(id)
+);
+
+CREATE TABLE IF NOT EXISTS debt (
+  id INT AUTO_INCREMENT,
+  reason VARCHAR(255) NOT NULL,
+  `value` NUMERIC(10,6) NOT NULL,
+  start_date TIMESTAMP NOT NULL,
+  user_id INT NOT NULL,
+  PRIMARY KEY(id),
+  CONSTRAINT fk_user_debt FOREIGN KEY (user_id) REFERENCES `user` (id)
+);
