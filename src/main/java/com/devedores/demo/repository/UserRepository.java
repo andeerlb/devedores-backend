@@ -15,4 +15,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("SELECT u.username FROM User u WHERE u.username IN :usernames")
     List<String> getOnlyExistsUsernamesByUsernames(@Param("usernames") List<String> usernames);
+
+    @Query(value = "SELECT * FROM user u WHERE CASE WHEN :onlyDebt = true THEN EXISTS (SELECT dbt.id FROM debt dbt WHERE dbt.user_id = u.id) ELSE true end", nativeQuery = true)
+    List<User> finAllByFilter(@Param("onlyDebt") Boolean onlyDebt);
 }

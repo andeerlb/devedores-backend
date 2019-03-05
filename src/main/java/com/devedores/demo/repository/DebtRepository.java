@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,4 +20,7 @@ public interface DebtRepository extends JpaRepository<Debt, Integer> {
     List<DebtDto> findAllDto();
 
     void deleteAllByUser(User user);
+
+    @Query("SELECT new com.devedores.demo.dto.DebtDto(debt) FROM Debt debt WHERE (debt.user.id = :userId OR :userId IS NULL) AND (debt.startDate = :startDate OR :startDate IS NULL)")
+    List<DebtDto> finAllByUseridOrStartDate(@Param("userId") Integer userId, @Param("startDate") Date startDate);
 }

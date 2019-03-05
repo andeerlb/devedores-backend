@@ -72,4 +72,7 @@ public class UserService {
         return repo.saveAll(onlyNotExistsUsername);
     }
 
+    public List<User> getAllByFilter(Boolean onlyDebt) {
+        return repo.finAllByFilter(onlyDebt);
+    }
 }

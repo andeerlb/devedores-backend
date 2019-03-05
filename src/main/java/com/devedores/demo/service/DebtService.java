@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -58,5 +59,9 @@ public class DebtService {
     public Boolean deleteAllByUser(User user){
         repo.deleteAllByUser(user);
         return Boolean.TRUE;
+    }
+
+    public List<DebtDto> getAllByFilter(Integer userId, Date startDate) {
+        return repo.finAllByUseridOrStartDate(userId, startDate);
     }
 }

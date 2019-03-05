@@ -26,6 +26,11 @@ public class UserController {
         return ResponseEntity.ok(service.getAll());
     }
 
+    @GetMapping("/allByFilter")
+    public ResponseEntity<List<User>> getAllByFilter(@RequestParam(name = "onlyDebt", required = false) Boolean onlyDebt) {
+        return ResponseEntity.ok(service.getAllByFilter(onlyDebt));
+    }
+
     @PostMapping
     public ResponseEntity<UserDto> create(@RequestBody UserDto userDto) {
         return ResponseEntity.ok(service.create(userDto));

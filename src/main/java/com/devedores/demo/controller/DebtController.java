@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -39,5 +40,11 @@ public class DebtController {
     @DeleteMapping
     public ResponseEntity<Boolean> delete(@RequestParam("id") Integer id){
         return ResponseEntity.ok(service.delete(id));
+    }
+
+    @GetMapping("/allByFilter")
+    public ResponseEntity<List<DebtDto>> getAllByFilter(@RequestParam(name = "userId", required = false) Integer userId,
+                                                        @RequestParam(name = "startDate", required = false) Date startDate){
+        return ResponseEntity.ok(service.getAllByFilter(userId, startDate));
     }
 }
